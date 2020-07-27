@@ -140,6 +140,11 @@ namespace Vocaluxe.Screens
         private SScreenSongOptions _Sso;
         
         private System.Timers.Timer _TimerShortInfoText;
+        
+        //song options
+        public bool _MuteSong = false;
+        public bool _ShowText = true;
+        public bool _ShowNotes = true;
 
         public override EMusicType CurrentMusicType
         {
@@ -498,7 +503,7 @@ namespace Vocaluxe.Screens
 
             CGame.UpdatePoints(_CurrentTime);
             _UpdateRatingBars();
-            _UpdateLyrics();
+            _UpdateLyrics();            
             if (CGame.GameMode == EGameMode.TR_GAMEMODE_MEDLEY)
                 _UpdateMedleyCountdown();
 
@@ -573,6 +578,7 @@ namespace Vocaluxe.Screens
                 return;
 
             _CurrentBeat = CGame.CurrentBeat;
+          
             _Lyrics[_LyricSub].Update(-100);
             _Lyrics[_LyricMain].Update(CGame.CurrentBeatF);
 
@@ -581,7 +587,7 @@ namespace Vocaluxe.Screens
 
             _Lyrics[_LyricSubTop].Update(-100);
             _Lyrics[_LyricMainTop].Update(CGame.CurrentBeatF);
-
+            
             for (int i = 0; i < song.Notes.VoiceCount; i++)
             {
                 if (i > 1)
@@ -597,38 +603,40 @@ namespace Vocaluxe.Screens
                 {
                     for (int j = 0; j < CGame.NumPlayers; j++)
                     {
-                        if (CGame.Players[j].VoiceNr == i)
+                        if (CGame.Players[j].VoiceNr == i && _ShowNotes)
                             _SingNotes[_SingBars].PlayerNotes[j].SetLine(nr);
                     }
-
-                    if (i == 0)
-                    {
-                        _Lyrics[_LyricMain].SetLine(lines[nr]);
-                        _Lyrics[_LyricMainTop].SetLine(lines[nr]);
-                        _TimeToFirstNote = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - lines[nr].StartBeat, song.BPM);
-                        _RemainingTimeToFirstNote = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - CGame.GetBeatFromTime(_CurrentTime, song.BPM, song.Gap), song.BPM);
-
-                        if (lines.Length >= nr + 2)
+                    if (_ShowText) 
+                    { 
+                        if (i == 0)
                         {
-                            _Lyrics[_LyricSub].SetLine(lines[nr + 1]);
-                            _Lyrics[_LyricSubTop].SetLine(lines[nr + 1]);
-                        }
-                        else
-                        {
-                            _Lyrics[_LyricSub].Clear();
-                            _Lyrics[_LyricSubTop].Clear();
-                        }
-                    }
-                    if (i == 1 && song.IsDuet)
-                    {
-                        _Lyrics[_LyricMainDuet].SetLine(lines[nr]);
-                        _TimeToFirstNoteDuet = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - lines[nr].StartBeat, song.BPM);
-                        _RemainingTimeToFirstNoteDuet = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - CGame.GetBeatFromTime(_CurrentTime, song.BPM, song.Gap), song.BPM);
+                            _Lyrics[_LyricMain].SetLine(lines[nr]);
+                            _Lyrics[_LyricMainTop].SetLine(lines[nr]);
+                            _TimeToFirstNote = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - lines[nr].StartBeat, song.BPM);
+                            _RemainingTimeToFirstNote = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - CGame.GetBeatFromTime(_CurrentTime, song.BPM, song.Gap), song.BPM);
 
-                        if (lines.Length >= nr + 2)
-                            _Lyrics[_LyricSubDuet].SetLine(lines[nr + 1]);
-                        else
-                            _Lyrics[_LyricSubDuet].Clear();
+                            if (lines.Length >= nr + 2)
+                            {
+                                _Lyrics[_LyricSub].SetLine(lines[nr + 1]);
+                                _Lyrics[_LyricSubTop].SetLine(lines[nr + 1]);
+                            }
+                            else
+                            {
+                                _Lyrics[_LyricSub].Clear();
+                                _Lyrics[_LyricSubTop].Clear();
+                            }
+                        }
+                        if (i == 1 && song.IsDuet)
+                        {
+                            _Lyrics[_LyricMainDuet].SetLine(lines[nr]);
+                            _TimeToFirstNoteDuet = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - lines[nr].StartBeat, song.BPM);
+                            _RemainingTimeToFirstNoteDuet = CGame.GetTimeFromBeats(lines[nr].FirstNoteBeat - CGame.GetBeatFromTime(_CurrentTime, song.BPM, song.Gap), song.BPM);
+
+                            if (lines.Length >= nr + 2)
+                                _Lyrics[_LyricSubDuet].SetLine(lines[nr + 1]);
+                            else
+                                _Lyrics[_LyricSubDuet].Clear();
+                        }
                     }
                 }
                 else
@@ -1143,7 +1151,14 @@ namespace Vocaluxe.Screens
             _Texts[_TextSongName].Text = songname;
 
             _CurrentStream = CSound.Load(song.GetMP3(), false, true, CConfig.Config.Sound.KaraokeEffect == EOffOn.TR_CONFIG_ON ? EAudioEffect.Karaoke : EAudioEffect.None);
-            CSound.SetStreamVolume(_CurrentStream, 100);
+            if (_MuteSong)
+            {
+                CSound.SetStreamVolume(_CurrentStream, 0);
+            }
+            else
+            {
+                CSound.SetStreamVolume(_CurrentStream, 100);
+            }
             CSound.SetPosition(_CurrentStream, song.Start);
             _CurrentTime = song.Start;
             _FinishTime = song.Finish;
