@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <PartyModeSystemVersion>2</PartyModeSystemVersion>
+  <Info>
+    <Name>TR_PARTYMODE_NAME</Name>
+    <Author>Quickxeryz</Author>
+	<Description>TR_PARTYMODE_DESCRIPTION</Description>
+    <Folder>Random</Folder>
+	<PartyModeFile>CPartyModeRandom</PartyModeFile>
+    <PartyModeVersionMajor>0</PartyModeVersionMajor>
+    <PartyModeVersionMinor>0</PartyModeVersionMinor>
+	<TargetAudience>TR_PARTYMODE_AUDIENCE</TargetAudience>
+  </Info>
+  <PartyScreens>
+    <ScreenFile>CPartyScreenRandomMain</ScreenFile>
+	<ScreenFile>CPartyScreenRandomConfig</ScreenFile>
+	<ScreenFile>CPartyScreenRandomNames</ScreenFile>
+	<ScreenFile>CPartyScreenRandomSongs</ScreenFile>
+  </PartyScreens>
+</root>

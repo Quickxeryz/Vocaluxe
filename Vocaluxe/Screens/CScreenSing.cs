@@ -140,11 +140,6 @@ namespace Vocaluxe.Screens
         private SScreenSongOptions _Sso;
         
         private System.Timers.Timer _TimerShortInfoText;
-        
-        //song options
-        public bool _MuteSong = false;
-        public bool _ShowText = true;
-        public bool _ShowNotes = true;
 
         public override EMusicType CurrentMusicType
         {
@@ -199,6 +194,10 @@ namespace Vocaluxe.Screens
             _TimerShortInfoText = new System.Timers.Timer(5000);
             _TimerShortInfoText.AutoReset = false;
             _TimerShortInfoText.Elapsed += OnTimedEventShortInfoText;
+
+            _Sso.Sing.MuteSong = false;
+            _Sso.Sing.ShowText = true;
+            _Sso.Sing.ShowNotes = true;
         }
 
         private void OnTimedEventShortInfoText(Object source, ElapsedEventArgs e)
@@ -603,10 +602,10 @@ namespace Vocaluxe.Screens
                 {
                     for (int j = 0; j < CGame.NumPlayers; j++)
                     {
-                        if (CGame.Players[j].VoiceNr == i && _ShowNotes)
+                        if (CGame.Players[j].VoiceNr == i && _Sso.Sing.ShowNotes)
                             _SingNotes[_SingBars].PlayerNotes[j].SetLine(nr);
                     }
-                    if (_ShowText) 
+                    if (_Sso.Sing.ShowText) 
                     { 
                         if (i == 0)
                         {
@@ -1151,7 +1150,7 @@ namespace Vocaluxe.Screens
             _Texts[_TextSongName].Text = songname;
 
             _CurrentStream = CSound.Load(song.GetMP3(), false, true, CConfig.Config.Sound.KaraokeEffect == EOffOn.TR_CONFIG_ON ? EAudioEffect.Karaoke : EAudioEffect.None);
-            if (_MuteSong)
+            if (_Sso.Sing.MuteSong)
             {
                 CSound.SetStreamVolume(_CurrentStream, 0);
             }

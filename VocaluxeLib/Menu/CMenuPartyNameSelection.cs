@@ -100,7 +100,6 @@ namespace VocaluxeLib.Menu
             _NumPlayerTeams = numPlayerTeams;
 
             _TeamList = new List<Guid>[_NumTeams > 0 ? _NumTeams : 1];
-
             if (_NumTeams != _NumPlayerTeams.Length)
                 _NumPlayerTeams = new int[_NumTeams];
 

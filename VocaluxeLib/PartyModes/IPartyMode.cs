@@ -25,6 +25,7 @@ namespace VocaluxeLib.PartyModes
     {
         public SSortingOptions Sorting;
         public SSelectionOptions Selection;
+        public SSingOptions Sing;
     }
 
     public struct SSortingOptions
@@ -84,6 +85,14 @@ namespace VocaluxeLib.PartyModes
         public string[] TeamNames;
     }
     #endregion Structs
+
+    public struct SSingOptions
+    {
+        //song options
+        public bool MuteSong;
+        public bool ShowText;
+        public bool ShowNotes;
+    }
 
     public interface IPartyModeInfo
     {
