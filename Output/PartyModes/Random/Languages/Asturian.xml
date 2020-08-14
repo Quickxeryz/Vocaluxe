@@ -12,7 +12,7 @@
   <string name="TR_BUTTON_NO">Non</string>
   <string name="TR_BUTTON_NEXT_ROUND">Ronda siguiente</string>
   <string name="TR_SCREENCONFIG_TITLE">Mou retu: Configuración</string>
-  <string name="TR_SCREENCONFIG_NUMPLAYERS">Númberu de xugadores</string>
+  <string name="TR_SCREENCONFIG_NUMPLAYER">Númberu de xugadores</string>
   <string name="TR_SCREENCONFIG_NUMMICS">Númberu de micrófonos</string>
   <string name="TR_SCREENCONFIG_NUMROUNDS">Númberu de rondes</string>
   <string name="TR_SCREENNAMES_TITLE">Mou retu: Esbillar xugador</string>

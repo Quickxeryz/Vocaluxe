@@ -13,7 +13,7 @@
   <string name="TR_BUTTON_NEXT_ROUND">Nästa omgång</string>
   <string name="TR_SONGS">Låtar</string>
   <string name="TR_SCREENCONFIG_TITLE">Utmanarläge: Konfiguration</string>
-  <string name="TR_SCREENCONFIG_NUMPLAYERS">Antal spelare</string>
+  <string name="TR_SCREENCONFIG_NUMPLAYER">Antal spelare</string>
   <string name="TR_SCREENCONFIG_NUMMICS">Antal mikrofoner</string>
   <string name="TR_SCREENCONFIG_NUMROUNDS">Antal omgångar</string>
   <string name="TR_SCREENCONFIG_NUMJOKERS">Antal jokrar</string>

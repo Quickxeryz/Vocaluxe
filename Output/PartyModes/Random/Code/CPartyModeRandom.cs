@@ -473,7 +473,13 @@ namespace VocaluxeLib.PartyModes.Random
             SPlayer[] playerFromPoints = points.GetPlayer(0, GameData.NumMics);
             for (int i = 0; i < GameData.NumMics; i++)
             {
-                GameData.TeamPoints[i] = (int)Math.Round(playerFromPoints[i].Points);
+                for (int j = 0; j < GameData.NumMics; j++)
+                {
+                    if ((int)Math.Round(playerFromPoints[i].Points) > (int)Math.Round(playerFromPoints[j].Points))
+                    {
+                        GameData.TeamPoints[i] += 1;
+                    }
+                }
             }
 
             if (GameData.CurrentRoundNr == GameData.NumRounds)

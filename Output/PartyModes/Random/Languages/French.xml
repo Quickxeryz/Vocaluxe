@@ -13,7 +13,7 @@
   <string name="TR_BUTTON_NEXT_ROUND">Tour suivant</string>
   <string name="TR_SONGS">Chansons</string>
   <string name="TR_SCREENCONFIG_TITLE">Mode Challenge: Configuration</string>
-  <string name="TR_SCREENCONFIG_NUMPLAYERS">Nombre de joueurs</string>
+  <string name="TR_SCREENCONFIG_NUMPLAYER">Nombre de joueurs</string>
   <string name="TR_SCREENCONFIG_NUMMICS">Nombre de micros</string>
   <string name="TR_SCREENCONFIG_NUMROUNDS">Nombre de tours</string>
   <string name="TR_SCREENCONFIG_NUMJOKERS">Nombre de jokers</string>

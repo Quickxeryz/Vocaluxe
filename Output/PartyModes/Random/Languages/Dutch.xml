@@ -12,7 +12,7 @@
   <string name="TR_BUTTON_NO">Nee</string>
   <string name="TR_BUTTON_NEXT_ROUND">Volgende Ronde</string>
   <string name="TR_SCREENCONFIG_TITLE">Uitdaging: Configuratie</string>
-  <string name="TR_SCREENCONFIG_NUMPLAYERS">Aantal spelers</string>
+  <string name="TR_SCREENCONFIG_NUMPLAYER">Aantal spelers</string>
   <string name="TR_SCREENCONFIG_NUMMICS">Aantal microfoons</string>
   <string name="TR_SCREENCONFIG_NUMROUNDS">Aantal rondes</string>
   <string name="TR_SCREENNAMES_TITLE">Uitdaging: Kies speler</string>

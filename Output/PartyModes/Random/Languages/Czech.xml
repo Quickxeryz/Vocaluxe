@@ -12,7 +12,7 @@
   <string name="TR_BUTTON_NO">Ne</string>
   <string name="TR_BUTTON_NEXT_ROUND">Další kolo</string>
   <string name="TR_SCREENCONFIG_TITLE">Soutěžní režim: Nastavení</string>
-  <string name="TR_SCREENCONFIG_NUMPLAYERS">Počet hráčů</string>
+  <string name="TR_SCREENCONFIG_NUMPLAYER">Počet hráčů</string>
   <string name="TR_SCREENCONFIG_NUMMICS">Počet mikrofonů</string>
   <string name="TR_SCREENCONFIG_NUMROUNDS">Počet kol</string>
   <string name="TR_SCREENCONFIG_NUMJOKERS">Počet žolíků</string>

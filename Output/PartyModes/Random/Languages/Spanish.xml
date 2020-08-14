@@ -12,7 +12,7 @@
   <string name="TR_BUTTON_NO">No</string>
   <string name="TR_BUTTON_NEXT_ROUND">TODO: Next Round</string>
   <string name="TR_SCREENCONFIG_TITLE">TODO: Challenge Mode: Configuration</string>
-  <string name="TR_SCREENCONFIG_NUMPLAYERS">TODO: Number of players</string>
+  <string name="TR_SCREENCONFIG_NUMPLAYER">TODO: Number of players</string>
   <string name="TR_SCREENCONFIG_NUMMICS">TODO: Number of mics</string>
   <string name="TR_SCREENCONFIG_NUMROUNDS">TODO: Number of rounds</string>
   <string name="TR_SCREENCONFIG_NUMJOKERS">Número de comodines</string>

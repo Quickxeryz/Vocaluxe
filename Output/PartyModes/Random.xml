@@ -13,8 +13,8 @@
   </Info>
   <PartyScreens>
     <ScreenFile>CPartyScreenRandomMain</ScreenFile>
-	<ScreenFile>CPartyScreenRandomConfig</ScreenFile>
-	<ScreenFile>CPartyScreenRandomNames</ScreenFile>
-	<ScreenFile>CPartyScreenRandomSongs</ScreenFile>
+	  <ScreenFile>CPartyScreenRandomConfig</ScreenFile>
+	  <ScreenFile>CPartyScreenRandomNames</ScreenFile>
+	  <ScreenFile>CPartyScreenRandomSongs</ScreenFile>
   </PartyScreens>
 </root>

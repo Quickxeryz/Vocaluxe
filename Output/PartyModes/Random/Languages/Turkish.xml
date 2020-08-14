@@ -12,7 +12,7 @@
   <string name="TR_BUTTON_NO">Hayır</string>
   <string name="TR_BUTTON_NEXT_ROUND">Sonraki Tur</string>
   <string name="TR_SCREENCONFIG_TITLE">Yarışma Modu: Yapılandırma</string>
-  <string name="TR_SCREENCONFIG_NUMPLAYERS">Oyuncu sayısı</string>
+  <string name="TR_SCREENCONFIG_NUMPLAYER">Oyuncu sayısı</string>
   <string name="TR_SCREENCONFIG_NUMMICS">Mikrofon sayısı</string>
   <string name="TR_SCREENCONFIG_NUMROUNDS">Tur sayısı</string>
   <string name="TR_SCREENNAMES_TITLE">Yarışma Modu: Oyuncu Seçiniz</string>
