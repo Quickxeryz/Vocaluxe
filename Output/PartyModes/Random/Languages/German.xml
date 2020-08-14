@@ -30,4 +30,5 @@
   <string name="TR_SCREENMAIN_POPUP_REALLYEXIT">Random Modus wirklich beenden?</string>
   <string name="TR_SCREENMAIN_NEXT_PLAYER">Spieler der nächsten Runde:</string>
   <string name="TR_SCREENMAIN_FINISH">Alle Runden wurden gesungen! Und der Gewinner ist...</string>
+  <string name="TR_SCREENEND_TITLE">Random Modus: Endergebnis</string> 
 </resources>

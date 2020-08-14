@@ -86,7 +86,8 @@ namespace VocaluxeLib.PartyModes.Random
             Main,
             SongSelection,
             Singing,
-            MedleySinging
+            MedleySinging,
+            End
         }
 
         public struct SData
@@ -206,6 +207,8 @@ namespace VocaluxeLib.PartyModes.Random
                     return CBase.Graphics.GetScreen(EScreen.Sing);
                 case EStage.MedleySinging:
                     return CBase.Graphics.GetScreen(EScreen.Sing);
+                case EStage.End:
+                    return _Screens["CPartyScreenRandomEnd"];
                 default:
                     throw new ArgumentException("Invalid stage: " + _Stage);
             }
@@ -254,6 +257,9 @@ namespace VocaluxeLib.PartyModes.Random
                     _Stage = EStage.Main;
                     _UpdateScores();
                     break;
+                case EStage.End:
+                    CBase.Graphics.FadeTo(EScreen.Party);
+                    break;
                 default:
                     throw new ArgumentException("Invalid stage: " + _Stage);
             }
@@ -274,7 +280,10 @@ namespace VocaluxeLib.PartyModes.Random
                     _Stage = EStage.Songs;
                     break;
                 case EStage.Main:
-                    _Stage = EStage.Names;
+                    CBase.Graphics.FadeTo(EScreen.Party);
+                    break;
+                case EStage.End:
+                    CBase.Graphics.FadeTo(EScreen.Party);
                     break;
                 default: // Rest is not allowed
                     throw new ArgumentException("Invalid stage: " + _Stage);
@@ -484,7 +493,7 @@ namespace VocaluxeLib.PartyModes.Random
 
             if (GameData.CurrentRoundNr == GameData.NumRounds)
             {
-                _Stage = EStage.Config;
+                _Stage = EStage.End;
             }
             GameData.CurrentRoundNr++;
         }

@@ -21,6 +21,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using VocaluxeLib.Songs;
+using VocaluxeLib.Menu;
 
 namespace VocaluxeLib.PartyModes.Random
 {
@@ -34,55 +35,41 @@ namespace VocaluxeLib.PartyModes.Random
             get { return 1; }
         }
 
-        private const string _SelectSlideNumPlayer = "SelectSlideNumPlayer";
-        private const string _SelectSlideNumMics = "SelectSlideNumMics";
-        private const string _SelectSlideNumRounds = "SelectSlideNumRounds";
-        private const string _SelectSlideNumJokers = "SelectSlideNumJokers";
-        private const string _SelectSlideRefillJokers = "SelectSlideRefillJokers";
-
         private const string _ButtonNext = "ButtonNext";
-        private const string _ButtonBack = "ButtonBack";
+        private const string _TextPoints = "TextPoints";
 
-        private bool _ConfigOk = true;
+        private List<CText> _Points;
 
         public override void Init()
         {
             base.Init();
-
-            _ThemeSelectSlides = new string[] { _SelectSlideNumPlayer, _SelectSlideNumMics, _SelectSlideNumRounds, _SelectSlideRefillJokers };
-            _ThemeButtons = new string[] { _ButtonNext, _ButtonBack };
+            _ThemeTexts = new string[]
+            {
+                _TextPoints
+            };
+            _ThemeButtons = new string[] 
+            {
+                _ButtonNext
+            };
         }
 
         public override bool HandleInput(SKeyEvent keyEvent)
         {
             base.HandleInput(keyEvent);
-
             if (keyEvent.KeyPressed) { }
             else
             {
                 switch (keyEvent.Key)
                 {
                     case Keys.Back:
+                        break;
                     case Keys.Escape:
-                        _PartyMode.Back();
                         break;
-
                     case Keys.Enter:
-                        _UpdateSlides();
-
-                        if (_Buttons[_ButtonBack].Selected)
-                            _PartyMode.Back();
-
                         if (_Buttons[_ButtonNext].Selected)
-                            _PartyMode.Next();
-                        break;
-
-                    case Keys.Left:
-                        _UpdateSlides();
-                        break;
-
-                    case Keys.Right:
-                        _UpdateSlides();
+                        {
+                            CBase.Graphics.FadeTo(EScreen.Party);
+                        }
                         break;
                 }
             }
@@ -92,80 +79,53 @@ namespace VocaluxeLib.PartyModes.Random
         public override bool HandleMouse(SMouseEvent mouseEvent)
         {
             base.HandleMouse(mouseEvent);
-
             if (mouseEvent.LB && _IsMouseOverCurSelection(mouseEvent))
             {
-                _UpdateSlides();
-                if (_Buttons[_ButtonBack].Selected)
-                    _PartyMode.Back();
-
                 if (_Buttons[_ButtonNext].Selected)
-                    _PartyMode.Next();
+                {
+                    CBase.Graphics.FadeTo(EScreen.Party);
+                }
             }
-
-            if (mouseEvent.RB)
-                _PartyMode.Back();
-
             return true;
         }
 
         public override void OnShow()
         {
             base.OnShow();
-
-            Debug.Assert(CBase.Config.GetMaxNumMics() >= 1);
-
-            _FillSlides();
-            _UpdateSlides();
+            _Points = new List<CText>();
+            for (int i = 0; i <= _PartyMode.GameData.NumMics; i++)
+            {
+                _Points.Add(GetNewText(_Texts[_TextPoints]));
+                _AddText(_Points[i]);
+            }
+            _Points[0].X = 650;
+            _Points[0].Y = 200;
+            _Points[0].Text = "Endergebnis:";
+            _Points[0].Visible = true;
+            int[] place = {-1, -1}; //{Points, Index}
+            for (int i = 1; i <= _PartyMode.GameData.NumMics; i++)
+            {
+                for(int j = 0; j<_PartyMode.GameData.TeamPoints.Length; j++)
+                {
+                    if(_PartyMode.GameData.TeamPoints[j] > place[0])
+                    {
+                        place[0] = _PartyMode.GameData.TeamPoints[j];
+                        place[1] = j;
+                    }
+                }
+                _Points[i].X = 650;
+                _Points[i].Y = 200 + i * 50;
+                _Points[i].Text = i + ". Platz mit " + _PartyMode.GameData.TeamPoints[place[1]] + " Punkten ist Team " + (place[1] + 1) + ".";
+                _Points[i].Visible = true;
+                _PartyMode.GameData.TeamPoints[place[1]] = - 1;
+                place[0] = -1;
+                place[1] = -1;
+            }
         }
 
         public override bool UpdateGame()
         {
-            _Buttons[_ButtonNext].Visible = _ConfigOk;
             return true;
-        }
-
-        private void _FillSlides()
-        {
-            _SelectSlides[_SelectSlideNumPlayer].Clear();
-            for (int i = 1; i <= 20; i++)
-            {
-                _SelectSlides[_SelectSlideNumPlayer].AddValue(i);
-            }
-            _SelectSlides[_SelectSlideNumPlayer].SelectedTag = _PartyMode.GameData.NumPlayer;
-
-            _SelectSlides[_SelectSlideNumMics].Clear();
-            for (int i = 1; i <= 6; i++)
-            {
-                _SelectSlides[_SelectSlideNumMics].AddValue(i);
-            }
-            _SelectSlides[_SelectSlideNumMics].SelectedTag = _PartyMode.GameData.NumMics;
-
-            _SelectSlides[_SelectSlideNumRounds].Clear();
-            for (int i = 1; i <= 100; i++)
-            {
-                _SelectSlides[_SelectSlideNumRounds].AddValue(i);
-            }
-            _SelectSlides[_SelectSlideNumRounds].SelectedTag = _PartyMode.GameData.NumRounds;
-
-            _SelectSlides[_SelectSlideNumJokers].Clear();
-            for (int i = 0; i <= 10; i++)
-            {
-                _SelectSlides[_SelectSlideNumJokers].AddValue(i);
-            }
-            _SelectSlides[_SelectSlideNumJokers].SelectedTag = _PartyMode.GameData.NumJokers;
-
-            _SelectSlides[_SelectSlideRefillJokers].AddValues(Enum.GetNames(typeof(EOffOn)));
-            _SelectSlides[_SelectSlideRefillJokers].Selection = (int)_PartyMode.GameData.RefillJokers;
-        }
-
-        private void _UpdateSlides()
-        {
-            _PartyMode.GameData.NumPlayer = _SelectSlides[_SelectSlideNumPlayer].SelectedTag;
-            _PartyMode.GameData.NumMics = _SelectSlides[_SelectSlideNumMics].SelectedTag;
-            _PartyMode.GameData.NumRounds = _SelectSlides[_SelectSlideNumRounds].SelectedTag;
-            _PartyMode.GameData.NumJokers = _SelectSlides[_SelectSlideNumJokers].SelectedTag;
-            _PartyMode.GameData.RefillJokers = (EOffOn)_SelectSlides[_SelectSlideRefillJokers].Selection;
         }
     }
 }

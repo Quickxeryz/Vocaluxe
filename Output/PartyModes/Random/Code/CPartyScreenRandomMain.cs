@@ -209,7 +209,7 @@ namespace VocaluxeLib.PartyModes.Random
             {
                 if (_PartyMode.GameData.CurrentRoundNr == 1)
                 {
-                    _PartyMode.Back();
+                    CBase.Graphics.FadeTo(EScreen.Party);
                 }
             }
             if (mouseEvent.Wheel != 0)

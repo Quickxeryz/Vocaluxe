@@ -7,7 +7,7 @@
 	<Description>TR_PARTYMODE_DESCRIPTION</Description>
     <Folder>Random</Folder>
 	<PartyModeFile>CPartyModeRandom</PartyModeFile>
-    <PartyModeVersionMajor>0</PartyModeVersionMajor>
+    <PartyModeVersionMajor>1</PartyModeVersionMajor>
     <PartyModeVersionMinor>0</PartyModeVersionMinor>
 	<TargetAudience>TR_PARTYMODE_AUDIENCE</TargetAudience>
   </Info>
