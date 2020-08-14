@@ -51,7 +51,6 @@ tx.exe
 /Output/Playlists/*.xml
 /Output/Profiles/*.xml
 /Output/Profiles/*.png
-/Output/PartyModes/*/Code/*
 /PartyModes/*/*/*.dll
 /VocaluxeLib/bin
 /ServerLib/bin/ClientServerLib.dll

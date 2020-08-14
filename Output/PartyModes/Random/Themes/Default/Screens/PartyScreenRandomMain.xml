@@ -41,6 +41,20 @@
       <Font>Outline</Font>
       <Text></Text>
     </Text>
+    <Text Name="TextPoints">
+      <X>0</X>
+      <Y>0</Y>
+      <Z>0</Z>
+      <H>50</H>
+      <MaxW>500</MaxW>
+      <Color Name="TextColor" />
+      <SelColor Name="TextSelColor" />
+      <Align>Left</Align>
+      <ResizeAlign>Center</ResizeAlign>
+      <Style>Bold</Style>
+      <Font>Outline</Font>
+      <Text></Text>
+    </Text>
     <Text Name="TextNextPlayer">
       <X>0</X>
       <Y>0</Y>
