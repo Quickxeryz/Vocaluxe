@@ -25,8 +25,8 @@ using VocaluxeLib.Songs;
 namespace VocaluxeLib.PartyModes.Random
 {
     // ReSharper disable UnusedMember.Global
-    public class CPartyScreenRandomConfig : CPartyScreenRandom
-        // ReSharper restore UnusedMember.Global
+    public class CPartyScreenRandomEnd : CPartyScreenRandom
+    // ReSharper restore UnusedMember.Global
     {
         // Version number for theme files. Increment it, if you've changed something on the theme files!
         protected override int _ScreenVersion
@@ -49,15 +49,15 @@ namespace VocaluxeLib.PartyModes.Random
         {
             base.Init();
 
-            _ThemeSelectSlides = new string[] { _SelectSlideNumPlayer, _SelectSlideNumMics, _SelectSlideNumRounds, _SelectSlideRefillJokers};
-            _ThemeButtons = new string[] {_ButtonNext, _ButtonBack};
+            _ThemeSelectSlides = new string[] { _SelectSlideNumPlayer, _SelectSlideNumMics, _SelectSlideNumRounds, _SelectSlideRefillJokers };
+            _ThemeButtons = new string[] { _ButtonNext, _ButtonBack };
         }
 
         public override bool HandleInput(SKeyEvent keyEvent)
         {
             base.HandleInput(keyEvent);
 
-            if (keyEvent.KeyPressed) {}
+            if (keyEvent.KeyPressed) { }
             else
             {
                 switch (keyEvent.Key)
@@ -135,7 +135,7 @@ namespace VocaluxeLib.PartyModes.Random
             _SelectSlides[_SelectSlideNumPlayer].SelectedTag = _PartyMode.GameData.NumPlayer;
 
             _SelectSlides[_SelectSlideNumMics].Clear();
-            for(int i = 1; i<=6; i++) 
+            for (int i = 1; i <= 6; i++)
             {
                 _SelectSlides[_SelectSlideNumMics].AddValue(i);
             }
