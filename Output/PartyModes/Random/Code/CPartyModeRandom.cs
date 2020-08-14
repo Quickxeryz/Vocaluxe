@@ -135,8 +135,8 @@ namespace VocaluxeLib.PartyModes.Random
             _ScreenSongOptions.Sorting.FilterPlaylistID = -1;
 
             _ScreenSongOptions.Sing.MuteSong = false;
-            _ScreenSongOptions.Sing.ShowText = true;
-            _ScreenSongOptions.Sing.ShowNotes = true;
+            _ScreenSongOptions.Sing.HideText = false;
+            _ScreenSongOptions.Sing.HideNotes = false;
 
             GameData = new SData
             {
@@ -464,8 +464,8 @@ namespace VocaluxeLib.PartyModes.Random
             #endregion PlayerNames
             #region Song options
             _ScreenSongOptions.Sing.MuteSong = GameData.GameModes[GameData.CurrentRoundNr - 1,0];
-            _ScreenSongOptions.Sing.ShowText = GameData.GameModes[GameData.CurrentRoundNr - 1,1];
-            _ScreenSongOptions.Sing.ShowNotes = GameData.GameModes[GameData.CurrentRoundNr - 1,2];
+            _ScreenSongOptions.Sing.HideText = GameData.GameModes[GameData.CurrentRoundNr - 1,1];
+            _ScreenSongOptions.Sing.HideNotes = GameData.GameModes[GameData.CurrentRoundNr - 1,2];
             #endregion Son options
             #region SongQueue
             //Add all songs with configure game mode to song queue
@@ -542,9 +542,9 @@ namespace VocaluxeLib.PartyModes.Random
             GameData.GameModes = new bool[GameData.NumRounds,3];
             for(int i = 0; i<GameData.NumRounds; i++)
             {
-                GameData.GameModes[i,0] = !(90 >= rnd.Next(1, 101)); //hear song
-                GameData.GameModes[i,1] = (85 >= rnd.Next(1, 101));  //show text
-                GameData.GameModes[i,2] = (80 >= rnd.Next(1, 101));  //show notes
+                GameData.GameModes[i,0] = (10 >= rnd.Next(1, 101)); //mute song
+                GameData.GameModes[i,1] = (15 >= rnd.Next(1, 101)); //hide text
+                GameData.GameModes[i,2] = (20 >= rnd.Next(1, 101)); //hide notes
             }
         }
     }

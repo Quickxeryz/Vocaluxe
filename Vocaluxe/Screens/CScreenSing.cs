@@ -194,10 +194,6 @@ namespace Vocaluxe.Screens
             _TimerShortInfoText = new System.Timers.Timer(5000);
             _TimerShortInfoText.AutoReset = false;
             _TimerShortInfoText.Elapsed += OnTimedEventShortInfoText;
-
-            _Sso.Sing.MuteSong = false;
-            _Sso.Sing.ShowText = true;
-            _Sso.Sing.ShowNotes = true;
         }
 
         private void OnTimedEventShortInfoText(Object source, ElapsedEventArgs e)
@@ -602,10 +598,10 @@ namespace Vocaluxe.Screens
                 {
                     for (int j = 0; j < CGame.NumPlayers; j++)
                     {
-                        if (CGame.Players[j].VoiceNr == i && _Sso.Sing.ShowNotes)
+                        if (CGame.Players[j].VoiceNr == i && !_Sso.Sing.HideNotes)
                             _SingNotes[_SingBars].PlayerNotes[j].SetLine(nr);
                     }
-                    if (_Sso.Sing.ShowText) 
+                    if (!_Sso.Sing.HideText) 
                     { 
                         if (i == 0)
                         {

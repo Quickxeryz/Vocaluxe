@@ -90,8 +90,8 @@ namespace VocaluxeLib.PartyModes
     {
         //song options
         public bool MuteSong;
-        public bool ShowText;
-        public bool ShowNotes;
+        public bool HideText;
+        public bool HideNotes;
     }
 
     public interface IPartyModeInfo

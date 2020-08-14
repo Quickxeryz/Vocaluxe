@@ -156,6 +156,7 @@
   <string name="TR_SCREENSING_BUTTON_CANCEL">Lied beenden</string>
   <string name="TR_SCREENSING_BUTTON_CONTINUE">Fortfahren</string>
   <string name="TR_SCREENSING_BUTTON_SKIP">Lied überspringen</string>
+  <string name="TR_SCREENSING_BUTTON_RESTART_GAME">Nochmal singen</string>
   <string name="TR_SCREENSING_NOMORESONGS">Keine weiteren Songs in der Playlist!</string>
   <string name="TR_SCREENSING_NOWEBCAM">Keine Webcam verfügbar!</string>
   <string name="TR_SCREENSING_ASPECTRATIO">Seitenverhältnis: %a</string>
