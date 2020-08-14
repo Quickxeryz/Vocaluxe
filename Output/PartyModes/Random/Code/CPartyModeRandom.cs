@@ -542,9 +542,9 @@ namespace VocaluxeLib.PartyModes.Random
             GameData.GameModes = new bool[GameData.NumRounds,3];
             for(int i = 0; i<GameData.NumRounds; i++)
             {
-                GameData.GameModes[i,0] = (0 == rnd.Next(0, 2));
-                GameData.GameModes[i,1] = (0 == rnd.Next(0, 2));
-                GameData.GameModes[i,2] = (0 == rnd.Next(0, 2));
+                GameData.GameModes[i,0] = !(90 >= rnd.Next(1, 101)); //hear song
+                GameData.GameModes[i,1] = (85 >= rnd.Next(1, 101));  //show text
+                GameData.GameModes[i,2] = (80 >= rnd.Next(1, 101));  //show notes
             }
         }
     }
