@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using VocaluxeLib.Menu;
+using VocaluxeLib.Profile;
 
 namespace VocaluxeLib.PartyModes.Random
 {
@@ -37,7 +38,7 @@ namespace VocaluxeLib.PartyModes.Random
         {
             base.Init();
             _PartyMode = (CPartyModeRandom)base._PartyMode;
-            _AllowChangePlayerNum = false;
+            //_AllowChangePlayerNum = false;
             _AllowChangeTeamNum = false;
         }
 
@@ -60,39 +61,103 @@ namespace VocaluxeLib.PartyModes.Random
                 }
             }
 
+            if (_PartyMode.GameData.ProfileIdsFromPlayerInTeams[0] != null)
+            {
+                for (int i = _PartyMode.GameData.NumMics; i < _TeamList.Length; i++)
+                {
+                    for (int j = 0; j < _PartyMode.GameData.NumPlayerInTeams[i]; j++)
+                    {
+                        _RemovePlayerByIndex(i, j);
+                    }
+                }
+                for (int i = 0; i < _TeamList.Length; i++)
+                {
+                    for (int j = amountPlayer[i]; j < _NumPlayerTeams[i]; j++)
+                    {
+                        _RemovePlayerByIndex(i, j);
+                    }
+                }
+            }
+
             SetPartyModeData(_PartyMode.GameData.NumMics, _PartyMode.GameData.NumPlayer, amountPlayer);
             List<Guid>[] ids;
-            switch (_PartyMode.GameData.NumMics)
+            if(_PartyMode.GameData.ProfileIdsFromPlayerInTeams[0] == null)
             {
-                case 1:
-                    ids = new List<Guid>[] { new List<Guid>() };
-                    SetPartyModeProfiles(ids);
-                    break;
-                case 2:
-                    ids = new List<Guid>[] { new List<Guid>() , new List<Guid>() };
-                    SetPartyModeProfiles(ids);
-                    break;
-                case 3:
-                    ids = new List<Guid>[] { new List<Guid>() , new List<Guid>() , new List<Guid>() };
-                    SetPartyModeProfiles(ids);
-                    break;
-                case 4:
-                    ids = new List<Guid>[] { new List<Guid>() , new List<Guid>() , new List<Guid>() , new List<Guid>() };
-                    SetPartyModeProfiles(ids);
-                    break;
-                case 5:
-                    ids = new List<Guid>[] { new List<Guid>() , new List<Guid>() , new List<Guid>() , new List<Guid>() , new List<Guid>() };
-                    SetPartyModeProfiles(ids);
-                    break;
-                case 6:
-                    ids = new List<Guid>[] { new List<Guid>() , new List<Guid>() , new List<Guid>() , new List<Guid>() , new List<Guid>() , new List<Guid>() };
-                    SetPartyModeProfiles(ids);
-                    break;
+                switch (_PartyMode.GameData.NumMics)
+                {
+                    case 1:
+                        ids = new List<Guid>[] { new List<Guid>() };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 2:
+                        ids = new List<Guid>[] { new List<Guid>(), new List<Guid>() };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 3:
+                        ids = new List<Guid>[] { new List<Guid>(), new List<Guid>(), new List<Guid>() };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 4:
+                        ids = new List<Guid>[] { new List<Guid>(), new List<Guid>(), new List<Guid>(), new List<Guid>() };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 5:
+                        ids = new List<Guid>[] { new List<Guid>(), new List<Guid>(), new List<Guid>(), new List<Guid>(), new List<Guid>() };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 6:
+                        ids = new List<Guid>[] { new List<Guid>(), new List<Guid>(), new List<Guid>(), new List<Guid>(), new List<Guid>(), new List<Guid>() };
+                        SetPartyModeProfiles(ids);
+                        break;
+                }
             }
+            else
+            {
+                switch (_PartyMode.GameData.NumMics)
+                {
+                    case 1:
+                        ids = new List<Guid>[] { _PartyMode.GameData.ProfileIdsFromPlayerInTeams[0] };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 2:
+                        ids = new List<Guid>[] { _PartyMode.GameData.ProfileIdsFromPlayerInTeams[0] , _PartyMode.GameData.ProfileIdsFromPlayerInTeams[1] };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 3:
+                        ids = new List<Guid>[] { _PartyMode.GameData.ProfileIdsFromPlayerInTeams[0], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[1], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[2] };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 4:
+                        ids = new List<Guid>[] { _PartyMode.GameData.ProfileIdsFromPlayerInTeams[0], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[1], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[2], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[3] };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 5:
+                        ids = new List<Guid>[] { _PartyMode.GameData.ProfileIdsFromPlayerInTeams[0], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[1], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[2], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[3], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[4] };
+                        SetPartyModeProfiles(ids);
+                        break;
+                    case 6:
+                        ids = new List<Guid>[] { _PartyMode.GameData.ProfileIdsFromPlayerInTeams[0], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[1], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[2], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[3], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[4], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[5], _PartyMode.GameData.ProfileIdsFromPlayerInTeams[6] };
+                        SetPartyModeProfiles(ids);
+                        break;
+                }
+            }
+            
         }
 
         public override void Back()
         {
+            _PartyMode.GameData.ProfileIdsFromPlayerInTeams = new List<Guid>[_TeamList.Length];
+            for (int i = 0; i < _PartyMode.GameData.ProfileIdsFromPlayerInTeams.Length; i++)
+            {
+                _PartyMode.GameData.ProfileIdsFromPlayerInTeams[i] = _TeamList[i];
+            }
+
+            _PartyMode.GameData.NumPlayerInTeams = new int[_NumPlayerTeams.Length];
+            for (int i = 0; i < _PartyMode.GameData.NumPlayerInTeams.Length; i++)
+            {
+                _PartyMode.GameData.NumPlayerInTeams[i] = _NumPlayerTeams[i];
+            }
+
             _PartyMode.Back();
         }
 

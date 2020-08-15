@@ -757,7 +757,7 @@ namespace VocaluxeLib.Menu
             }
         }
 
-        private void _RemovePlayerByIndex(int team, int index)
+        public void _RemovePlayerByIndex(int team, int index)
         {
             if (_TeamList[team].Count > index)
             {
