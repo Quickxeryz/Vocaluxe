@@ -128,7 +128,7 @@ namespace VocaluxeLib.PartyModes.Random
         private void _FillSlides()
         {
             _SelectSlides[_SelectSlideNumPlayer].Clear();
-            for (int i = 1; i <= 20; i++)
+            for (int i = 2; i <= 20; i++)
             {
                 _SelectSlides[_SelectSlideNumPlayer].AddValue(i);
             }
@@ -167,6 +167,22 @@ namespace VocaluxeLib.PartyModes.Random
             _PartyMode.GameData.NumRounds = _SelectSlides[_SelectSlideNumRounds].SelectedTag;
             _PartyMode.GameData.NumJokers = _SelectSlides[_SelectSlideNumJokers].SelectedTag;
             _PartyMode.GameData.RefillJokers = (EOffOn)_SelectSlides[_SelectSlideRefillJokers].Selection;
+
+            int selectedNumPlayer = _SelectSlides[_SelectSlideNumPlayer].SelectedTag;
+            _SelectSlides[_SelectSlideNumPlayer].Clear();
+            for (int i = _SelectSlides[_SelectSlideNumMics].SelectedTag; i <= 20; i++)
+            {
+                _SelectSlides[_SelectSlideNumPlayer].AddValue(i);
+            }
+            if (_SelectSlides[_SelectSlideNumPlayer].SelectedTag < _SelectSlides[_SelectSlideNumMics].SelectedTag)
+            {
+                _SelectSlides[_SelectSlideNumPlayer].SelectedTag = _SelectSlides[_SelectSlideNumMics].SelectedTag;
+            }
+            else
+            {
+                _SelectSlides[_SelectSlideNumPlayer].SelectedTag = selectedNumPlayer;
+            }
+            ;
         }
     }
 }
