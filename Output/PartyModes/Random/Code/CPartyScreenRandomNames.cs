@@ -146,6 +146,13 @@ namespace VocaluxeLib.PartyModes.Random
         {
             firstTime = false;
 
+            _PartyMode.GameData.NumMics = _TeamList.Length;
+            _PartyMode.GameData.NumPlayer = 0;
+            for (int i = 0; i < _NumPlayerTeams.Length; i++)
+            {
+                _PartyMode.GameData.NumPlayer += _NumPlayerTeams[i];
+            }
+
             _PartyMode.GameData.NumPlayerInTeams = new int[_NumPlayerTeams.Length];
             for (int i = 0; i < _PartyMode.GameData.NumPlayerInTeams.Length; i++)
             {
