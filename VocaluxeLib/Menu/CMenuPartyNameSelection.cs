@@ -46,7 +46,7 @@ namespace VocaluxeLib.Menu
         protected bool _AllowChangeTeamNum = true;
         protected bool _ChangePlayerNumDynamic = true;
         protected bool _ChangeTeamNumDynamic = true;
-        private int _CurrentTeam;
+        protected int _CurrentTeam;
 
         private bool _AvatarsChanged;
         private bool _ProfilesChanged;
@@ -757,7 +757,7 @@ namespace VocaluxeLib.Menu
             }
         }
 
-        public void _RemovePlayerByIndex(int team, int index)
+        protected void _RemovePlayerByIndex(int team, int index)
         {
             if (_TeamList[team].Count > index)
             {

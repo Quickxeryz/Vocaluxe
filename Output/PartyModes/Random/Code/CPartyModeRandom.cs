@@ -142,7 +142,7 @@ namespace VocaluxeLib.PartyModes.Random
             {
                 NumPlayer = 0,
                 NumPlayerInTeams = new int[1],
-                ProfileIdsFromPlayerInTeams = new List<Guid>[1],
+                ProfileIdsFromPlayerInTeams = new List<Guid>[0],
                 RandomProfileIdsFromPlayerInTeams = new List<Guid>[1],
                 NumMics = 1,
                 NumRounds = 1,
