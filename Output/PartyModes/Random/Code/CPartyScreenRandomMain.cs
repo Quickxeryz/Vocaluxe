@@ -158,7 +158,7 @@ namespace VocaluxeLib.PartyModes.Random
             {
                 _Points[i].X = 1000;
                 _Points[i].Y = 50 + i * 50;
-                _Points[i].Text = "Team " + i + ": " + _PartyMode.GameData.TeamPoints[i - 1];
+                _Points[i].Text = _PartyMode.GameData.TeamNames[i - 1] + ": " + _PartyMode.GameData.TeamPoints[i - 1];
                 _Points[i].Color = CBase.Themes.GetPlayerColor(i);
                 _Points[i].Visible = true;
             }

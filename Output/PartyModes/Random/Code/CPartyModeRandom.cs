@@ -83,6 +83,7 @@ namespace VocaluxeLib.PartyModes.Random
             Config,
             Songs,
             Names,
+            TeamNames,
             Main,
             SongSelection,
             Singing,
@@ -102,6 +103,7 @@ namespace VocaluxeLib.PartyModes.Random
             public int[] RemindJokers;
             public bool[,] GameModes;
             public int[] TeamPoints;
+            public string[] TeamNames;
 
             public ESongSource SongSource;
             public ESongSorting Sorting;
@@ -151,6 +153,7 @@ namespace VocaluxeLib.PartyModes.Random
                 CurrentRoundNr = 1,
                 GameModes = new bool[1,1],
                 TeamPoints = new int[1],
+                TeamNames = new string[1],
                 Sorting = CBase.Config.GetSongSorting(),
                 SongSource = ESongSource.TR_SONGSOURCE_ALLSONGS,
                 PlaylistID = 0,
@@ -199,6 +202,8 @@ namespace VocaluxeLib.PartyModes.Random
                     return _Screens["CPartyScreenRandomSongs"];
                 case EStage.Names:
                     return _Screens["CPartyScreenRandomNames"];
+                case EStage.TeamNames:
+                    return _Screens["CPartyScreenRandomTeamNames"];
                 case EStage.Main:
                     return _Screens["CPartyScreenRandomMain"];
                 case EStage.SongSelection:
@@ -230,6 +235,9 @@ namespace VocaluxeLib.PartyModes.Random
                     _Stage = EStage.Names;
                     break;
                 case EStage.Names:
+                    _Stage = EStage.TeamNames;
+                    break;
+                case EStage.TeamNames:
                     _Stage = EStage.Main;
                     CBase.Songs.ResetSongSung();
                     GameData.CurrentRoundNr = 1;
@@ -278,6 +286,9 @@ namespace VocaluxeLib.PartyModes.Random
                     break;
                 case EStage.Names:
                     _Stage = EStage.Songs;
+                    break;
+                case EStage.TeamNames:
+                    _Stage = EStage.Names;
                     break;
                 case EStage.Main:
                     CBase.Graphics.FadeTo(EScreen.Party);

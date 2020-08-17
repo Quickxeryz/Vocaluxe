@@ -15,6 +15,7 @@
     <ScreenFile>CPartyScreenRandomMain</ScreenFile>
 	  <ScreenFile>CPartyScreenRandomConfig</ScreenFile>
 	  <ScreenFile>CPartyScreenRandomNames</ScreenFile>
+    <ScreenFile>CPartyScreenRandomTeamNames</ScreenFile>
 	  <ScreenFile>CPartyScreenRandomSongs</ScreenFile>
     <ScreenFile>CPartyScreenRandomEnd</ScreenFile>
   </PartyScreens>
