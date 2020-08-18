@@ -83,7 +83,7 @@ namespace VocaluxeLib.PartyModes.Random
             _Statics[_StaticNextPlayer].Visible = false;
 
             _NextGameMode = new List<CText>();
-            for (int i = 0; i<=3; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 _NextGameMode.Add(GetNewText(_Texts[_TextNextGameMode]));
                 _AddText(_NextGameMode[i]);
@@ -92,8 +92,6 @@ namespace VocaluxeLib.PartyModes.Random
             _NextGameMode[0].Y = 50;
             _NextGameMode[0].Text = "Spielmodus:";
             _NextGameMode[0].Visible = true;
-
-
         }
 
         public override void OnShow()
@@ -102,7 +100,7 @@ namespace VocaluxeLib.PartyModes.Random
 
             _UpdateNextPlayerPositions();
             _UpdateNextPlayerContents();
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 _NextGameMode[i].X = 50;
                 _NextGameMode[i].Y = 50 + i * 50;
@@ -136,6 +134,16 @@ namespace VocaluxeLib.PartyModes.Random
                         else
                         {
                             _NextGameMode[i].Text = "ohne Noten";
+                        }
+                        break;
+                    case 4:
+                        if (_PartyMode.GameData.GameModes[_PartyMode.GameData.CurrentRoundNr - 1, i - 1])
+                        {
+                            _NextGameMode[i].Text = "Bis " + _PartyMode.GameData.MaxPointsSong[_PartyMode.GameData.CurrentRoundNr - 1] + " Punkte"; 
+                        }
+                        else
+                        {
+                            _NextGameMode[i].Text = "";
                         }
                         break;
                 }

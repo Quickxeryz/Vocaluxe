@@ -485,6 +485,17 @@ namespace Vocaluxe.Screens
             else
                 finish = true;
 
+            if (_Sso.Sing.MaxPointSwitch)
+            {
+                for (int p = 0; p < CGame.NumPlayers; p++)
+                {
+                    if (CGame.Players[p].Points >= _Sso.Sing.MaxPointNumber)
+                    {
+                        finish = true;
+                    }
+                }
+            }
+
             if (finish && !_FadeOut)
                 _NextSong();
 

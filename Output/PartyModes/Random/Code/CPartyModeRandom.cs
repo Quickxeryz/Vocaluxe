@@ -118,6 +118,8 @@ namespace VocaluxeLib.PartyModes.Random
             public List<int> Songs;
 
             public EOffOn RefillJokers;
+
+            public int[] MaxPointsSong;
         }
 
         public SData GameData;
@@ -139,6 +141,8 @@ namespace VocaluxeLib.PartyModes.Random
             _ScreenSongOptions.Sing.MuteSong = false;
             _ScreenSongOptions.Sing.HideText = false;
             _ScreenSongOptions.Sing.HideNotes = false;
+            _ScreenSongOptions.Sing.MaxPointSwitch = false;
+            _ScreenSongOptions.Sing.MaxPointNumber = 0;
 
             GameData = new SData
             {
@@ -151,7 +155,7 @@ namespace VocaluxeLib.PartyModes.Random
                 NumJokers = 0,
                 RemindJokers = new int[1],
                 CurrentRoundNr = 1,
-                GameModes = new bool[1,1],
+                GameModes = new bool[1, 1],
                 TeamPoints = new int[1],
                 TeamNames = new string[1],
                 Sorting = CBase.Config.GetSongSorting(),
@@ -161,7 +165,8 @@ namespace VocaluxeLib.PartyModes.Random
                 GameMode = EGameMode.TR_GAMEMODE_NORMAL,
                 NumMedleySongs = 5,
                 Songs = new List<int>(),
-                RefillJokers = EOffOn.TR_CONFIG_OFF
+                RefillJokers = EOffOn.TR_CONFIG_OFF,
+                MaxPointsSong = new int[1]
             };
         }
 
@@ -477,6 +482,8 @@ namespace VocaluxeLib.PartyModes.Random
             _ScreenSongOptions.Sing.MuteSong = GameData.GameModes[GameData.CurrentRoundNr - 1,0];
             _ScreenSongOptions.Sing.HideText = GameData.GameModes[GameData.CurrentRoundNr - 1,1];
             _ScreenSongOptions.Sing.HideNotes = GameData.GameModes[GameData.CurrentRoundNr - 1,2];
+            _ScreenSongOptions.Sing.MaxPointSwitch = GameData.GameModes[GameData.CurrentRoundNr - 1, 3];
+            _ScreenSongOptions.Sing.MaxPointNumber = GameData.MaxPointsSong[GameData.CurrentRoundNr - 1];
             #endregion Son options
             #region SongQueue
             //Add all songs with configure game mode to song queue
@@ -550,12 +557,32 @@ namespace VocaluxeLib.PartyModes.Random
         public void _RandomizeSingOptions()
         {
             System.Random rnd = new System.Random();
-            GameData.GameModes = new bool[GameData.NumRounds,3];
-            for(int i = 0; i<GameData.NumRounds; i++)
+            GameData.GameModes = new bool[GameData.NumRounds, 4];
+            for (int i = 0; i<GameData.NumRounds; i++)
             {
-                GameData.GameModes[i,0] = (10 >= rnd.Next(1, 101)); //mute song
-                GameData.GameModes[i,1] = (15 >= rnd.Next(1, 101)); //hide text
-                GameData.GameModes[i,2] = (20 >= rnd.Next(1, 101)); //hide notes
+                GameData.GameModes[i, 0] = (10 >= rnd.Next(1, 101)); //mute song
+                GameData.GameModes[i, 1] = (15 >= rnd.Next(1, 101)); //hide text
+                GameData.GameModes[i, 2] = (20 >= rnd.Next(1, 101)); //hide notes
+                GameData.GameModes[i, 3] = (75 <= rnd.Next(1, 101)); //set max points
+            }
+            GameData.MaxPointsSong = new int[GameData.NumRounds];
+            int help = 0;
+            for (int i = 0; i<GameData.NumRounds; i++)
+            {
+                if (GameData.GameModes[i, 3])
+                {
+                    help = rnd.Next(1, 101);
+                    if (help <= 33)
+                    {
+                        GameData.MaxPointsSong[i] = 2000;
+                    } else if (help <= 66)
+                    {
+                        GameData.MaxPointsSong[i] = 5000;
+                    } else if (help <= 100)
+                    {
+                        GameData.MaxPointsSong[i] = 8000;
+                    }
+                }
             }
         }
     }
