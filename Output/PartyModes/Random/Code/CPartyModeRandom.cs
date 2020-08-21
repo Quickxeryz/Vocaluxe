@@ -120,6 +120,9 @@ namespace VocaluxeLib.PartyModes.Random
             public EOffOn RefillJokers;
 
             public int[] MaxPointsSong;
+            public bool[] MaxPointsSongSwitch;
+            public int[] AheadPoints;
+            public bool[] AheadPointsSwitch;
         }
 
         public SData GameData;
@@ -166,7 +169,10 @@ namespace VocaluxeLib.PartyModes.Random
                 NumMedleySongs = 5,
                 Songs = new List<int>(),
                 RefillJokers = EOffOn.TR_CONFIG_OFF,
-                MaxPointsSong = new int[1]
+                MaxPointsSong = new int[1],
+                MaxPointsSongSwitch = new bool[1],
+                AheadPoints = new int[1],
+                AheadPointsSwitch = new bool[1]
             };
         }
 
@@ -482,8 +488,22 @@ namespace VocaluxeLib.PartyModes.Random
             _ScreenSongOptions.Sing.MuteSong = GameData.GameModes[GameData.CurrentRoundNr - 1,0];
             _ScreenSongOptions.Sing.HideText = GameData.GameModes[GameData.CurrentRoundNr - 1,1];
             _ScreenSongOptions.Sing.HideNotes = GameData.GameModes[GameData.CurrentRoundNr - 1,2];
-            _ScreenSongOptions.Sing.MaxPointSwitch = GameData.GameModes[GameData.CurrentRoundNr - 1, 3];
-            _ScreenSongOptions.Sing.MaxPointNumber = GameData.MaxPointsSong[GameData.CurrentRoundNr - 1];
+            if (GameData.MaxPointsSongSwitch[GameData.CurrentRoundNr - 1]){
+                _ScreenSongOptions.Sing.MaxPointSwitch = true;
+                _ScreenSongOptions.Sing.MaxPointNumber = GameData.MaxPointsSong[GameData.CurrentRoundNr - 1];
+            } else
+            {
+                _ScreenSongOptions.Sing.MaxPointSwitch = false;
+            }
+            if (GameData.AheadPointsSwitch[GameData.CurrentRoundNr - 1])
+            {
+                _ScreenSongOptions.Sing.AheadSwitch = true;
+                _ScreenSongOptions.Sing.AheadNumber = GameData.AheadPoints[GameData.CurrentRoundNr - 1];
+            }
+            else
+            {
+                _ScreenSongOptions.Sing.AheadSwitch = false;
+            }
             #endregion Son options
             #region SongQueue
             //Add all songs with configure game mode to song queue
@@ -557,30 +577,49 @@ namespace VocaluxeLib.PartyModes.Random
         public void _RandomizeSingOptions()
         {
             System.Random rnd = new System.Random();
+
+            GameData.MaxPointsSong = new int[GameData.NumRounds];
+            GameData.MaxPointsSongSwitch = new bool[GameData.NumRounds];
+            GameData.AheadPoints = new int[GameData.NumRounds];
+            GameData.AheadPointsSwitch = new bool[GameData.NumRounds];
+
             GameData.GameModes = new bool[GameData.NumRounds, 4];
             for (int i = 0; i<GameData.NumRounds; i++)
             {
                 GameData.GameModes[i, 0] = (10 >= rnd.Next(1, 101)); //mute song
                 GameData.GameModes[i, 1] = (15 >= rnd.Next(1, 101)); //hide text
                 GameData.GameModes[i, 2] = (20 >= rnd.Next(1, 101)); //hide notes
-                GameData.GameModes[i, 3] = (75 <= rnd.Next(1, 101)); //set max points
+                GameData.GameModes[i, 3] = (30 >= rnd.Next(1, 101)); //set song stop points
+
+                GameData.MaxPointsSongSwitch[i] = false;
+                GameData.AheadPointsSwitch[i] = false;
             }
-            GameData.MaxPointsSong = new int[GameData.NumRounds];
             int help = 0;
             for (int i = 0; i<GameData.NumRounds; i++)
             {
                 if (GameData.GameModes[i, 3])
                 {
                     help = rnd.Next(1, 101);
-                    if (help <= 33)
+                    if (help <= 20)
                     {
+                        GameData.MaxPointsSongSwitch[i] = true;
                         GameData.MaxPointsSong[i] = 2000;
-                    } else if (help <= 66)
+                    } else if (help <= 40)
                     {
+                        GameData.MaxPointsSongSwitch[i] = true;
                         GameData.MaxPointsSong[i] = 5000;
+                    } else if (help <= 60)
+                    {
+                        GameData.MaxPointsSongSwitch[i] = true;
+                        GameData.MaxPointsSong[i] = 8000;
+                    } else if (help <= 80)
+                    {
+                        GameData.AheadPointsSwitch[i] = true;
+                        GameData.AheadPoints[i] = 500;
                     } else if (help <= 100)
                     {
-                        GameData.MaxPointsSong[i] = 8000;
+                        GameData.AheadPointsSwitch[i] = true;
+                        GameData.AheadPoints[i] = 1000;
                     }
                 }
             }

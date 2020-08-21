@@ -94,6 +94,8 @@ namespace VocaluxeLib.PartyModes
         public bool HideNotes;
         public bool MaxPointSwitch;
         public int MaxPointNumber;
+        public bool AheadSwitch;
+        public int AheadNumber;
     }
 
     public interface IPartyModeInfo

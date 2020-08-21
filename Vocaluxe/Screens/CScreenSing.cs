@@ -491,8 +491,36 @@ namespace Vocaluxe.Screens
                 {
                     if (CGame.Players[p].Points >= _Sso.Sing.MaxPointNumber)
                     {
+                        CGame.Players[p].Points = _Sso.Sing.MaxPointNumber;
                         finish = true;
                     }
+                }
+            }
+
+            if (_Sso.Sing.AheadSwitch)
+            {
+                double first = CGame.Players[0].Points;
+                int position = 0;
+                double second = 0;
+                for (int p = 1; p < CGame.NumPlayers; p++)
+                {
+                    if (CGame.Players[p].Points > first)
+                    {
+                        second = first;
+                        first = CGame.Players[p].Points;
+                        position = p;
+                    } else
+                    {
+                        if (CGame.Players[p].Points > second)
+                        {
+                            second = CGame.Players[p].Points;
+                        }
+                    }   
+                }
+                if ((first - second) >= _Sso.Sing.AheadNumber)
+                {
+                    CGame.Players[position].Points = second + _Sso.Sing.AheadNumber;
+                    finish = true;
                 }
             }
 

@@ -137,10 +137,14 @@ namespace VocaluxeLib.PartyModes.Random
                         }
                         break;
                     case 4:
-                        if (_PartyMode.GameData.GameModes[_PartyMode.GameData.CurrentRoundNr - 1, i - 1])
+                        if (_PartyMode.GameData.MaxPointsSongSwitch[_PartyMode.GameData.CurrentRoundNr - 1])
                         {
                             _NextGameMode[i].Text = "Bis " + _PartyMode.GameData.MaxPointsSong[_PartyMode.GameData.CurrentRoundNr - 1] + " Punkte"; 
                         }
+                        else if (_PartyMode.GameData.AheadPointsSwitch[_PartyMode.GameData.CurrentRoundNr - 1])
+                        {
+                            _NextGameMode[i].Text = "Vorsprung von " + _PartyMode.GameData.AheadPoints[_PartyMode.GameData.CurrentRoundNr - 1] + " Punkte";
+                        } 
                         else
                         {
                             _NextGameMode[i].Text = "";
