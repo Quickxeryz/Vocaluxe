@@ -119,21 +119,21 @@ namespace VocaluxeLib.PartyModes.Random
                     case 2:
                         if (_PartyMode.GameData.GameModes[_PartyMode.GameData.CurrentRoundNr - 1, i - 1])
                         {
-                            _NextGameMode[i].Text = "mit Text";
+                            _NextGameMode[i].Text = "ohne Text";
                         }
                         else
                         {
-                            _NextGameMode[i].Text = "ohne Text";
+                            _NextGameMode[i].Text = "mit Text";
                         }
                         break;
                     case 3:
                         if (_PartyMode.GameData.GameModes[_PartyMode.GameData.CurrentRoundNr - 1, i - 1])
                         {
-                            _NextGameMode[i].Text = "mit Noten";
+                            _NextGameMode[i].Text = "ohne Noten";
                         }
                         else
                         {
-                            _NextGameMode[i].Text = "ohne Noten";
+                            _NextGameMode[i].Text = "mit Noten";
                         }
                         break;
                     case 4:
